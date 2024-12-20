@@ -4,43 +4,38 @@ import axios from 'axios';
 import Navbar from './Navbar';
 
 export function App() {
-  // State to manage the ToDo input and list of tasks
   const [todo, setTodo] = useState("");
   const [tasks, setTasks] = useState([]);
 
-  // Function to fetch the list of tasks
   const fetchTasks = async () => {
     try {
       const response = await axios.get('http://localhost:8000/todos/');
-      setTasks(response.data); // Assuming response.data is an array of tasks
+      setTasks(response.data); 
     } catch (error) {
       console.error("Error fetching tasks:", error);
     }
   };
 
-  // Function to handle form submission
   const postTask = async (event) => {
     event.preventDefault();
     try {
       await axios.post('http://localhost:8000/todos/', { name: todo });
-      setTodo(""); // Clear input field
-      fetchTasks(); // Refresh tasks after adding a new one
+      setTodo(""); 
+      fetchTasks(); 
     } catch (error) {
       console.error("Error posting the ToDo:", error);
     }
   };
 
-  // Function to delete a task
   const deleteTask = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:8000/todos/${taskId}/`); // Assuming each task has a unique ID
-      fetchTasks(); // Refresh tasks after deleting
+      await axios.delete(`http://localhost:8000/todos/${taskId}/`); 
+      fetchTasks();
     } catch (error) {
       console.error("Error deleting the ToDo:", error);
     }
   };
 
-  // Fetch tasks when the component mounts
   useEffect(() => {
     fetchTasks();
   }, []);

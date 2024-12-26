@@ -1,5 +1,3 @@
-import './navbar.css'
-
 export function Navbar() {
   return (
     <div class="navbar-container">

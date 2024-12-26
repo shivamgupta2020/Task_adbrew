@@ -20,6 +20,7 @@ class TodoListView(APIView):
         db.insert_one(request.data)
         return Response({}, status=status.HTTP_201_CREATED)
 
+#look for delete all functionality
     def delete(self, request, task_id=None):
         if task_id:
             try:
